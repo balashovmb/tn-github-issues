@@ -53,4 +53,5 @@ function getIssues() {
 
     searchButton.addEventListener('click', showResult)
 }
-getIssues();
+
+export {getIssues};
