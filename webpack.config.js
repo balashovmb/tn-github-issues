@@ -14,5 +14,14 @@ module.exports = {
         new HTMLWebpackPlugin({
             template: 'src/index.html'
         })
-    ]
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader'
+            },
+        ],
+    },
 }
