@@ -1,3 +1,5 @@
-import getIssues from './get-issues.ts';
+import showIssues from './show-issues.ts';
 
-getIssues();
+const searchButton = document.getElementById('search-button');
+
+searchButton.addEventListener('click', showIssues);
