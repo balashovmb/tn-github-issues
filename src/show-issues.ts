@@ -15,6 +15,15 @@ function getAddress():string {
   return `https://api.github.com/repos/${user}/${repo}/issues`;
 }
 
+function loadingStatus():NodeJS.Timeout {
+  let bar = '';
+  const timerId = setInterval(() => {
+    bar += '|';
+    serviceMsg.innerText = `Загрузка ${bar}`;
+  }, 200);
+  return timerId;
+}
+
 const loadIssues = ():Promise<Issue[]> => {
   const address:string = getAddress();
   return fetch(address).then((result) => {
@@ -57,11 +66,13 @@ function renderIssues(issues:Issue[]):void {
 
 const showIssues = async ():Promise<void> => {
   issuesRoot.innerHTML = '';
-  serviceMsg.innerText = 'Идет загрузка';
+  const stausInterval = loadingStatus();
   try {
     const issues:Issue[] = await loadIssues();
+    clearInterval(stausInterval);
     renderIssues(issues);
   } catch (e) {
+    clearInterval(stausInterval);
     console.error(e);
     serviceMsg.innerText = `Ошибка: ${e}`;
   }
