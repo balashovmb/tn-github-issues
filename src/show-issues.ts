@@ -25,13 +25,28 @@ const loadIssues = ():Promise<Issue[]> => {
   });
 };
 
-function appendIssue(container:HTMLElement, issue:Issue):void {
+function issueHTMLString(issue:Issue):string {
   const {
     number, title, body,
   } = issue;
-  const dateIssue:string = issue.created_at.substr(0, 10);
+  const issueDate:string = issue.created_at.substr(0, 10);
+  let issueHTML = `${number} ${issueDate} ${title}`;
+  if (body) {
+    issueHTML += '<br>';
+    if (body.length < 50) {
+      issueHTML += body;
+    } else {
+      issueHTML += body.substr(0, 50);
+    }
+  }
+  issueHTML += '<hr>';
+  return issueHTML;
+}
+
+function appendIssue(container:HTMLElement, issue:Issue):void {
+  const htmlString = issueHTMLString(issue);
   const div:HTMLElement = document.createElement('div');
-  div.innerHTML = `${number} ${dateIssue} ${title} <br> ${body} <hr>`;
+  div.innerHTML = htmlString;
   container.append(div);
 }
 
