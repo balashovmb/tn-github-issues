@@ -1,27 +1,23 @@
 import loadingStatus from '../common/loading-status';
 import getAddress from './get-address';
-import Repo from '../types/repo';
 import loadObjects from '../requests/load-objects';
 import Destinations from '../types/destinations';
 import addElementsToSelect from './add-elements-to-select';
+import User from '../types/user';
 
 const issuesRoot:HTMLElement = document.getElementById('issues-root');
 const serviceMsg:HTMLElement = document.getElementById('service-msg');
-const reposList = <HTMLSelectElement>document.getElementById('repos-list');
+const assigneesList = <HTMLSelectElement>document.getElementById('assignees-list');
 
-const showRepos = async ():Promise<void> => {
+const showAssignies = async ():Promise<void> => {
   issuesRoot.innerHTML = '';
   const statusInterval = loadingStatus(serviceMsg);
-  const address:string = getAddress(Destinations.user);
+  const address:string = getAddress(Destinations.assignees);
   try {
-    const repos:Repo[] = await loadObjects<Repo[]>(address);
+    const assignees = await loadObjects<User[]>(address);
     clearInterval(statusInterval);
     serviceMsg.innerText = '';
-    if (repos.length === 0) {
-      serviceMsg.innerHTML = 'Пользователь с таким логином отсутствует либо не имеет репозитариев.';
-    } else {
-      addElementsToSelect(reposList, repos, 'repo');
-    }
+    addElementsToSelect(assigneesList, assignees, 'assignee');
   } catch (e) {
     clearInterval(statusInterval);
     console.error(e);
@@ -29,4 +25,4 @@ const showRepos = async ():Promise<void> => {
   }
 };
 
-export default showRepos;
+export default showAssignies;

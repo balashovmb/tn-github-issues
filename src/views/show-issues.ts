@@ -8,10 +8,15 @@ import Destinations from '../types/destinations';
 const issuesRoot:HTMLElement = document.getElementById('issues-root');
 const serviceMsg:HTMLElement = document.getElementById('service-msg');
 
-const showIssues = async ():Promise<void> => {
+const showIssues = async (assigned:boolean):Promise<void> => {
   issuesRoot.innerHTML = '';
   const statusInterval = loadingStatus(serviceMsg);
-  const address:string = getAddress(Destinations.issues);
+  let address:string;
+  if (assigned) {
+    address = getAddress(Destinations.assignedIssues);
+  } else {
+    address = getAddress(Destinations.issues);
+  }
   try {
     const issues = await loadObjects<Issue[]>(address);
     clearInterval(statusInterval);
