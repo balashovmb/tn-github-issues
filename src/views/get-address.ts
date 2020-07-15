@@ -1,4 +1,4 @@
-import Destinations from '../types/destinations.ts';
+import Destinations from '../types/destinations';
 
 function getAddress(destination:Destinations):string {
   const user:string = (<HTMLInputElement>document.getElementById('user-input')).value;

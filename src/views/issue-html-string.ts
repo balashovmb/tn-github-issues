@@ -1,4 +1,4 @@
-import Issue from '../types/issue.ts';
+import Issue from '../types/issue';
 
 function issueHTMLString(issue:Issue):string {
   const {

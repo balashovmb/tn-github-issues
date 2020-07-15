@@ -1,4 +1,4 @@
-import Repo from '../types/repo.ts';
+import Repo from '../types/repo';
 
 function addReposToSelect(selectEl:HTMLSelectElement, repos:Repo[]):void{
   const selectElement = selectEl;

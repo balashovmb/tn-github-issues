@@ -1,9 +1,9 @@
-import loadingStatus from '../common/loading-status.ts';
-import getAddress from './get-address.ts';
-import Issue from '../types/issue.ts';
-import loadObjects from '../requests/load-objects.ts';
-import renderIssues from './render-issues.ts';
-import Destinations from '../types/destinations.ts';
+import loadingStatus from '../common/loading-status';
+import getAddress from './get-address';
+import Issue from '../types/issue';
+import loadObjects from '../requests/load-objects';
+import renderIssues from './render-issues';
+import Destinations from '../types/destinations';
 
 const issuesRoot:HTMLElement = document.getElementById('issues-root');
 const serviceMsg:HTMLElement = document.getElementById('service-msg');

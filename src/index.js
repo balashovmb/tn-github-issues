@@ -1,6 +1,6 @@
-import showRepos from './views/show-repos.ts';
-import showIssues from './views/show-issues.ts';
-import throttle from './common/throttle.ts';
+import showRepos from './views/show-repos';
+import showIssues from './views/show-issues';
+import throttle from './common/throttle';
 
 const userInput = document.getElementById('user-input');
 const reposInput = document.getElementById('repos-input');

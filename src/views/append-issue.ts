@@ -1,4 +1,4 @@
-import Issue from '../types/issue.ts';
+import Issue from '../types/issue';
 import issueHTMLString from './issue-html-string.ts';
 
 function appendIssue(container:HTMLElement, issue:Issue):void {
