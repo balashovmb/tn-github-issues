@@ -6,6 +6,8 @@ type Issue = {
     body:string,
     // eslint-disable-next-line camelcase
     created_at:string,
-    user: User
+    user: User,
+    url: string,
+    state: string,
   }
 export default Issue;

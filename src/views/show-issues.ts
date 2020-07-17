@@ -4,6 +4,9 @@ import Issue from '../types/issue';
 import loadObjects from '../requests/load-objects';
 import renderIssues from './render-issues';
 import Destinations from '../types/destinations';
+// eslint-disable-next-line import/extensions
+import addListenerToButtons from './add-listener-to-buttons';
+import openIssueInfo from './open-issue-info';
 
 const issuesRoot:HTMLElement = document.getElementById('issues-root');
 const serviceMsg:HTMLElement = document.getElementById('service-msg');
@@ -22,6 +25,7 @@ const showIssues = async (assigned:boolean):Promise<void> => {
     clearInterval(statusInterval);
     serviceMsg.innerText = '';
     renderIssues(issuesRoot, issues);
+    addListenerToButtons(openIssueInfo);
   } catch (e) {
     clearInterval(statusInterval);
     console.error(e);

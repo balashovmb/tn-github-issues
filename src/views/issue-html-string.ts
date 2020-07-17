@@ -1,21 +1,22 @@
 import Issue from '../types/issue';
+import userHtmlString from './user-html-string';
 
 function issueHTMLString(issue:Issue):string {
   const {
-    number, title, body, user,
+    number, title, body, user, url,
   } = issue;
-  const issueDate:string = issue.created_at.substr(0, 10);
   let issueHTML = `<p> ${number}  ${title} </p>`;
+  issueHTML += '<p>';
   if (body) {
-    issueHTML += '<p>';
     if (body.length < 50) {
       issueHTML += body;
     } else {
       issueHTML += body.substr(0, 50);
     }
-    issueHTML += '</p>';
   }
-  issueHTML += `<img src="${user.avatar_url}" width="30"> <a href='${user.url}'>${user.login}</a> ${issueDate}`;
+  issueHTML += ` <a href='./issue.html' data-number=${url} class='issue-btn'>Подробнее</a>`;
+  issueHTML += '</p>';
+  issueHTML += userHtmlString(user, issue.created_at);
   issueHTML += '<hr>';
   return issueHTML;
 }
