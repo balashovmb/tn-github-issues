@@ -4,7 +4,7 @@ module.exports = {
     es2020: true,
   },
   extends: [
-    'airbnb',
+    'airbnb-base',
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
@@ -18,5 +18,21 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        ts: 'never',
+      },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+        extensions: ['.js', '.ts'],
+      },
+    },
   },
 };

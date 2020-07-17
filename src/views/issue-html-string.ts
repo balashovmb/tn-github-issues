@@ -1,19 +1,18 @@
 import Issue from '../types/issue';
+import userHtmlString from './user-html-string';
 
 function issueHTMLString(issue:Issue):string {
   const {
-    number, title, body,
+    number, title, body, user, url,
   } = issue;
-  const issueDate:string = issue.created_at.substr(0, 10);
-  let issueHTML = `${number} ${issueDate} ${title}`;
+  let issueHTML = `<p> ${number}  ${title} </p>`;
+  issueHTML += '<p>';
   if (body) {
-    issueHTML += '<br>';
-    if (body.length < 50) {
-      issueHTML += body;
-    } else {
-      issueHTML += body.substr(0, 50);
-    }
+    issueHTML += body.substr(0, 50);
   }
+  issueHTML += ` <a href='./issue.html' data-number=${url} class='issue-btn'>Подробнее</a>`;
+  issueHTML += '</p>';
+  issueHTML += userHtmlString(user, issue.created_at);
   issueHTML += '<hr>';
   return issueHTML;
 }
