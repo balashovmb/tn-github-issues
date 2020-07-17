@@ -15,13 +15,12 @@ const showAssignies = async ():Promise<void> => {
   const address:string = getAddress(Destinations.assignees);
   try {
     const assignees = await loadObjects<User[]>(address);
-    clearInterval(statusInterval);
     serviceMsg.innerText = '';
     addElementsToSelect(assigneesList, assignees, 'assignee');
   } catch (e) {
+    console.error('Error in showAssignees', e);
+  } finally {
     clearInterval(statusInterval);
-    console.error(e);
-    serviceMsg.innerText = `Ошибка: ${e}`;
   }
 };
 

@@ -4,7 +4,6 @@ import Issue from '../types/issue';
 import loadObjects from '../requests/load-objects';
 import renderIssues from './render-issues';
 import Destinations from '../types/destinations';
-// eslint-disable-next-line import/extensions
 import addListenerToButtons from './add-listener-to-buttons';
 import openIssueInfo from './open-issue-info';
 
@@ -22,18 +21,18 @@ const showIssues = async (assigned:boolean):Promise<void> => {
   }
   try {
     const issues = await loadObjects<Issue[]>(address);
-    clearInterval(statusInterval);
     serviceMsg.innerText = '';
     renderIssues(issuesRoot, issues);
     addListenerToButtons(openIssueInfo);
   } catch (e) {
-    clearInterval(statusInterval);
-    console.error(e);
+    console.error('Error in showIssues', e);
     if (e.toString() === 'Error: 404') {
       serviceMsg.innerText = 'Репозиторий с таким названием отсутсвует у пользователя';
     } else {
       serviceMsg.innerText = `Ошибка: ${e}`;
     }
+  } finally {
+    clearInterval(statusInterval);
   }
 };
 

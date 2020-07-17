@@ -17,7 +17,7 @@ reposInput.addEventListener('input', throttle(() => {
 
 reposInput.addEventListener('input', throttle(() => {
   showAssignees();
-}, 600));
+}, 500));
 
 assigneesInput.addEventListener('input', throttle(() => {
   showIssues(true);

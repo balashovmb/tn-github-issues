@@ -8,11 +8,7 @@ function issueHTMLString(issue:Issue):string {
   let issueHTML = `<p> ${number}  ${title} </p>`;
   issueHTML += '<p>';
   if (body) {
-    if (body.length < 50) {
-      issueHTML += body;
-    } else {
-      issueHTML += body.substr(0, 50);
-    }
+    issueHTML += body.substr(0, 50);
   }
   issueHTML += ` <a href='./issue.html' data-number=${url} class='issue-btn'>Подробнее</a>`;
   issueHTML += '</p>';

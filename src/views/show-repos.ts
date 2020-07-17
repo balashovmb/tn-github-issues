@@ -15,7 +15,6 @@ const showRepos = async ():Promise<void> => {
   const address:string = getAddress(Destinations.user);
   try {
     const repos:Repo[] = await loadObjects<Repo[]>(address);
-    clearInterval(statusInterval);
     serviceMsg.innerText = '';
     if (repos.length === 0) {
       serviceMsg.innerHTML = 'Пользователь с таким логином отсутствует либо не имеет репозитариев.';
@@ -23,9 +22,10 @@ const showRepos = async ():Promise<void> => {
       addElementsToSelect(reposList, repos, 'repo');
     }
   } catch (e) {
-    clearInterval(statusInterval);
-    console.error(e);
+    console.error('Error in showRepos', e);
     serviceMsg.innerText = `Ошибка: ${e}`;
+  } finally {
+    clearInterval(statusInterval);
   }
 };
 
